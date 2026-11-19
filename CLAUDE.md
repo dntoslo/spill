@@ -9,6 +9,7 @@
 
 ## Hyttedata og bilder
 
+- Spillet har bare med hytter som DNT Oslo og Omegn både eier og driver, ikke andre foreningers hytter eller hytter vi bare driver for andre.
 - Hytteinformasjon og bilder hentes fra ut.no, og vi har lov til å bruke dem i spillet.
 - Vis alltid fotografens navn sammen med bilder fra ut.no.
 

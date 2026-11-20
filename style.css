@@ -1,0 +1,206 @@
+/* Farger og mål samlet på ett sted, så de er lette å endre. */
+:root {
+  --bakgrunn: #f4f1ea;
+  --flate: #ffffff;
+  --tekst: #1f2a24;
+  --dempet: #5b665f;
+  --kant: #d9d4c7;
+  --hoved: #2f6b4f;
+  --hoved-mork: #24543e;
+  --gjett: #1d4e89;
+  --fasit: #c8442b;
+  --panelbredde: 380px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bakgrunn);
+  color: var(--tekst);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+h1, h2, p, ul, ol { margin: 0; }
+a { color: var(--hoved-mork); }
+
+[hidden] { display: none !important; }
+
+/* Topplinja */
+.topp {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--hoved);
+  color: #fff;
+}
+.topp h1 { font-size: 1.15rem; }
+.status { display: flex; gap: 16px; font-variant-numeric: tabular-nums; }
+
+/* Selve spillet: panel og handling til venstre, kart til høyre */
+.spill {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--panelbredde) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "panel kart"
+    "handling kart";
+}
+
+.panel { grid-area: panel; padding: 16px 16px 0; background: var(--flate); }
+.handling {
+  grid-area: handling;
+  padding: 12px 16px 16px;
+  background: var(--flate);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+}
+.kart { grid-area: kart; min-height: 0; background: #dfe7e2; }
+
+.bilde {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #e3dfd3;
+}
+.bilde img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.bilde figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 2px 8px;
+  border-top-left-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.75rem;
+}
+.bilde-mangler {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  text-align: center;
+  color: var(--dempet);
+}
+
+#hyttenavn { margin-top: 12px; font-size: 1.5rem; line-height: 1.2; }
+
+.hjelp { color: var(--dempet); }
+
+.svar { display: flex; flex-direction: column; gap: 6px; }
+.svar-poeng strong { font-size: 1.35rem; }
+.svar-fakta { color: var(--dempet); }
+
+/* Knapper */
+.knapp {
+  appearance: none;
+  border: 2px solid var(--hoved);
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: var(--hoved);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.knapp:hover { background: var(--hoved-mork); border-color: var(--hoved-mork); }
+.knapp:disabled { background: #b9c4bd; border-color: #b9c4bd; cursor: not-allowed; }
+.knapp:focus-visible, a:focus-visible { outline: 3px solid #f2b705; outline-offset: 2px; }
+.knapp-lys { background: var(--flate); color: var(--hoved-mork); }
+.knapp-lys:hover { background: #e8f0eb; }
+.knapperad { display: flex; flex-wrap: wrap; gap: 10px; }
+.knapperad .knapp { flex: 1 1 180px; }
+
+/* Start- og sluttskjerm */
+.dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(31, 42, 36, 0.55);
+  overflow: auto;
+}
+.dialog-kort {
+  width: min(520px, 100%);
+  padding: 24px;
+  border-radius: 14px;
+  background: var(--flate);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.dialog-kort h2 { font-size: 1.6rem; }
+.dialog-kort ul { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+.liten { font-size: 0.85rem; color: var(--dempet); min-height: 1.2em; white-space: pre-line; }
+.rekord { font-weight: 600; color: var(--hoved-mork); }
+
+.slutt-sum strong { font-size: 2rem; font-variant-numeric: tabular-nums; }
+.slutt-liste {
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid var(--kant);
+}
+.slutt-liste li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--kant);
+  font-variant-numeric: tabular-nums;
+}
+.slutt-liste .km { color: var(--dempet); white-space: nowrap; }
+.slutt-liste .poeng { font-weight: 600; min-width: 4.5em; text-align: right; }
+
+/* Markørene i kartet */
+.nal {
+  width: 26px;
+  height: 26px;
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+.nal-gjett { background: var(--gjett); }
+.nal-fasit { background: var(--fasit); }
+.kart .leaflet-tooltip { font: inherit; font-size: 0.85rem; font-weight: 600; }
+
+/* Mobil: bilde øverst, kart i midten, knapp nederst */
+@media (max-width: 800px) {
+  .spill {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "panel"
+      "kart"
+      "handling";
+  }
+  .panel { padding: 10px 12px; display: flex; align-items: center; gap: 12px; }
+  .bilde { flex: 0 0 42%; aspect-ratio: 4 / 3; }
+  #hyttenavn { margin-top: 0; font-size: 1.2rem; }
+  .handling { padding: 10px 12px 12px; gap: 8px; max-height: 40vh; }
+  .kart { min-height: 40vh; }
+  .topp { padding: 8px 12px; }
+  .topp h1 { font-size: 1rem; }
+  .status { gap: 10px; font-size: 0.9rem; }
+}
+
+/* Før første runde er det ingen fotograf å vise. */
+.bilde figcaption:empty { display: none; }

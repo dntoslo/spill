@@ -31,6 +31,10 @@ Spillet har med hytter som DNT Oslo og Omegn står som eier av på ut.no, og som
 - nødbuer, stengte hytter og serveringssteder
 - egne selvbetjent-oppføringer for en betjent hytte som allerede er med, for eksempel «Gjendebu Selvbetjent»
 - oppføringer som ikke er en hytte, for eksempel gapahuken på Sæteren Gård
+- småhytter og anneks som hører til en hytte som allerede er med, for eksempel småhyttene på Sæteren Gård og Fehytta ved Liomseter
+- Tungestølen Leir
+
+«Sæteren Gård - Hovedhus+Sovehus» på ut.no heter bare «Sæteren Gård» i spillet.
 
 ### Oppdatere hyttelista
 
